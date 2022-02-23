@@ -1,0 +1,16 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+    image: app
+    env_file:
+      - .env
+    ports:
+      - 80:80
+    healthcheck:
+      test: curl http://localhost/heartbeat || exit 1
+      retries: 3
+      interval: 5m
+      start_period: 30s
+      timeout: 30s
